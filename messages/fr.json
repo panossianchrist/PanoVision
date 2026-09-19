@@ -102,7 +102,10 @@
     "prepare": "Préparer le message",
     "prepared": "Votre message est préparé, mais pas envoyé.",
     "send": "Ouvrir la messagerie",
-    "download": "Télécharger le message"
+    "download": "Télécharger le message",
+    "l1": "DONNONS DE LA",
+    "l2": "VISIBILITÉ À",
+    "l3": "VOTRE MARQUE."
   },
   "networkPage": {
     "title": "LE LIBAN. UNE VISION CONNECTÉE.",
@@ -439,7 +442,7 @@
     "connectedIndex": "06 / Un parcours connecté",
     "connectedTitle": "MOINS D'ALLERS-RETOURS. PLUS DE VISIBILITÉ.",
     "connectedText": "Planifiez les emplacements, prévisualisez vos contenus et suivez votre campagne depuis votre espace client privé.",
-    "aboutIndex": "07 / À propos de PanoVision",
+    "aboutIndex": "06 / À propos de PanoVision",
     "aboutTitle": "UN NOUVEAU REGARD SUR L'AFFICHAGE.",
     "rooted": "Ancré au Liban. Pensé pour la visibilité.",
     "aboutText": "PanoVision est une entreprise libanaise de publicité extérieure numérique qui développe un réseau d'écrans routiers connectés.",
@@ -493,7 +496,17 @@
       "Saida": "Saïda / Sidon",
       "Tyre": "Tyr",
       "Nabatieh": "Nabatieh"
-    }
+    },
+    "hint": "Ctrl + molette pour zoomer",
+    "controls": "Commandes de la carte",
+    "screensSoon": "LES EMPLACEMENTS D'ÉCRANS PANOVISION ARRIVENT AVEC L'EXTENSION DU RÉSEAU.",
+    "reachAreas": "{count, plural, one {zone sélectionnée} other {zones sélectionnées}}",
+    "factType": "Type de campagne",
+    "factTypeValue": "Choisi à l'étape suivante",
+    "factScreens": "Écrans potentiels",
+    "factPrice": "Prix estimé",
+    "factPriceValue": "En attente de vérification",
+    "reach": "VOTRE PORTÉE"
   },
   "estimate": {
     "title": "Estimation de campagne",
@@ -527,7 +540,42 @@
     "Custom": "Message personnalisé",
     "occasion": "Type d'occasion",
     "time": "Heure souhaitée (Beyrouth)",
-    "minutes": "Durée personnalisée en minutes"
+    "minutes": "Durée personnalisée en minutes",
+    "t1": "UN MOMENT QUI",
+    "t2": "NE PASSE PAS INAPERÇU.",
+    "question": "QUEL EST LE MOMENT ?",
+    "duration": "DURÉE",
+    "previewTag": "APERÇU D'EXEMPLE",
+    "demo": "Contenu de démonstration PanoVision",
+    "Other": "Autre",
+    "screenLabel": "Écran PanoVision affichant un message d'exemple pour l'occasion choisie",
+    "faces": {
+      "Birthday": {
+        "tag": "ANNIVERSAIRE",
+        "a": "VOTRE MESSAGE",
+        "b": "EN LUMIÈRE."
+      },
+      "Proposal": {
+        "tag": "DEMANDE EN MARIAGE",
+        "a": "UN MOMENT",
+        "b": "À VOIR."
+      },
+      "Launch": {
+        "tag": "LANCEMENT",
+        "a": "MAINTENANT",
+        "b": "EN VUE."
+      },
+      "Celebration": {
+        "tag": "CÉLÉBRATION",
+        "a": "FAITES-LE",
+        "b": "VOIR."
+      },
+      "Custom": {
+        "tag": "VOTRE MOMENT",
+        "a": "VOS MOTS",
+        "b": "À L'ÉCRAN."
+      }
+    }
   },
   "preview": {
     "title": "Aperçu sur écran PanoVision",
@@ -559,7 +607,9 @@
   "cta": {
     "label": "Votre prochaine campagne commence ici",
     "title": "PRÊT À ÊTRE VU ?",
-    "text": "Dites-nous où, quand et comment vous souhaitez diffuser votre campagne."
+    "text": "Dites-nous où, quand et comment vous souhaitez diffuser votre campagne.",
+    "t1": "PRÊT À",
+    "t2": "ÊTRE VU ?"
   },
   "workflow": {
     "Explore": "Explorer",
@@ -578,5 +628,63 @@
     "LiveText": "Les campagnes validées sont diffusées aux emplacements et dates confirmés.",
     "Verify": "Vérifier la diffusion",
     "VerifyText": "Consultez les preuves et rapports lorsque des données de diffusion réelles sont disponibles."
+  },
+  "hero": {
+    "tag1": "PANOVISION",
+    "tag2": "RÉSEAU PANOVISION",
+    "tag3": "FORMAT 08 SEC",
+    "tag4": "LIBAN",
+    "f1a": "VOTRE MARQUE",
+    "f1b": "ICI.",
+    "f2a": "LÀ OÙ LES MARQUES",
+    "f2b": "SE FONT VOIR.",
+    "f3a": "08 SECONDES.",
+    "f3b": "FORT IMPACT.",
+    "f4a": "BÂTISSEZ",
+    "f4b": "VOTRE PORTÉE.",
+    "index1": "Des écrans numériques, en hauteur, face à la route",
+    "index2": "Des campagnes planifiées et prévisualisées en ligne",
+    "index3": "Le Liban, ville par ville",
+    "screenLabel": "Écran de démonstration PanoVision affichant des messages PanoVision d'exemple",
+    "format": "FORMAT 08 SEC",
+    "media": "AFFICHAGE NUMÉRIQUE EXTÉRIEUR",
+    "building": "RÉSEAU EN CONSTRUCTION",
+    "ready": "CRÉATION PRÊTE",
+    "demo": "Contenu de démonstration PanoVision"
+  },
+  "road": {
+    "l1": "LA ROUTE",
+    "l2": "EST VOTRE",
+    "l3": "AUDIENCE."
+  },
+  "concept": {
+    "l1": "CONÇU POUR",
+    "l2": "ÊTRE VU.",
+    "note1": "ÉCRAN NUMÉRIQUE SURÉLEVÉ",
+    "note2": "VISIBILITÉ DEPUIS LA ROUTE",
+    "note3": "FORMAT 08 SEC"
+  },
+  "network": {
+    "label": "LE RÉSEAU",
+    "l1": "BÂTISSEZ",
+    "l2": "VOTRE PORTÉE.",
+    "support": "Sélectionnez une ville, combinez plusieurs zones et construisez le point de départ de votre campagne."
+  },
+  "flow": {
+    "demoLabel": "Démonstration d'une création fictive passant du téléversement à l'aperçu puis à la vérification",
+    "idle": "EN ATTENTE DE CRÉATION",
+    "tileTag": "CRÉATION FICTIVE",
+    "tileA": "VOTRE PUB",
+    "tileB": "ICI.",
+    "drop": "DÉPOSEZ LA CRÉATION",
+    "demoNote": "Démonstration avec une création PanoVision fictive. Pas une campagne client.",
+    "status0": "CHOIX DES ZONES",
+    "status1": "CONSTRUCTION DU BRIEF",
+    "status2": "CRÉATION TÉLÉVERSÉE",
+    "status3": "APERÇU PRÊT",
+    "status4": "EN VÉRIFICATION",
+    "status5": "DEVIS APRÈS APPROBATION",
+    "status6": "PRÊT À ÊTRE DIFFUSÉ",
+    "status7": "PREUVES À LA DIFFUSION"
   }
 }

@@ -1,12 +1,5 @@
 import type { Metadata } from "next";
-import {
-  ArrowUpRight,
-  Mail,
-  Camera as Instagram,
-  MapPin,
-  Phone,
-  MessageCircle,
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { ContactForm } from "@/components/ContactForm";
 import { company, whatsappLink } from "@/lib/company";
@@ -21,68 +14,62 @@ export default async function ContactPage() {
     locale = await getLocale();
   const whatsapp = whatsappLink(locale);
   return (
-    <>
-      <section className="page-intro container">
-        <span className="eyebrow">{common("contact")} / PanoVision</span>
-        <h1>{t("title")}</h1>
-        <p>{t("intro")}</p>
-      </section>
-      <section className="container contact-layout">
-        <aside className="contact-details">
-          <h2>PanoVision</h2>
-          <p>
-            <MapPin size={17} />
-            {common("lebanon")}
+    <div className="pv-contact">
+      <section className="pv-contact-hero">
+        <div className="pv-wrap">
+          <p className="micro pv-label">
+            <i className="pv-dot" /> {common("contact")} / PanoVision
           </p>
-          <div>
-            <span className="micro muted">
-              <Mail size={15} />
-              {common("email")}
-            </span>
-            <a href={`mailto:${company.email}`} dir="ltr">
-              {company.email}
-              <ArrowUpRight size={16} />
+          <h1 className="pv-display pv-display-xl">
+            <span>{t("l1")}</span>
+            <span>{t("l2")}</span>
+            <span>{t("l3")}</span>
+          </h1>
+          <p className="pv-contact-intro">{t("intro")}</p>
+        </div>
+      </section>
+
+      <section className="pv-wrap pv-contact-layout">
+        <ul className="pv-contact-links">
+          <li>
+            <a href={`mailto:${company.email}`}>
+              <span className="micro">{common("email")}</span>
+              <strong dir="ltr">{company.email}</strong>
+              <ArrowUpRight size={22} />
             </a>
-          </div>
-          <div>
-            <span className="micro muted">
-              <Instagram size={15} />
-              Instagram
-            </span>
-            <a
-              href={company.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              dir="ltr"
-            >
-              {company.instagramHandle}
-              <ArrowUpRight size={16} />
+          </li>
+          <li>
+            <a href={company.instagram} target="_blank" rel="noopener noreferrer">
+              <span className="micro">Instagram</span>
+              <strong dir="ltr">{company.instagramHandle}</strong>
+              <ArrowUpRight size={22} />
             </a>
-          </div>
-          {company.phone && (
-            <div>
-              <span className="micro muted">
-                <Phone size={15} />
-                {common("phone")}
-              </span>
-              <a dir="ltr" href={`tel:${company.phone.replace(/[^+\d]/g, "")}`}>
-                {company.phone}
-              </a>
-            </div>
-          )}
+          </li>
           {whatsapp && (
-            <div>
+            <li>
               <a href={whatsapp} target="_blank" rel="noopener noreferrer">
-                <MessageCircle size={17} />
-                WhatsApp
-                <ArrowUpRight size={16} />
+                <span className="micro">WhatsApp</span>
+                <strong>{common("contact")}</strong>
+                <ArrowUpRight size={22} />
               </a>
-            </div>
+            </li>
           )}
-          <p className="contact-tagline">{common("tagline")}</p>
-        </aside>
+          {company.phone && (
+            <li>
+              <a dir="ltr" href={`tel:${company.phone.replace(/[^+\d]/g, "")}`}>
+                <span className="micro">{common("phone")}</span>
+                <strong>{company.phone}</strong>
+                <ArrowUpRight size={22} />
+              </a>
+            </li>
+          )}
+          <li className="pv-contact-where">
+            <span className="micro">{common("country")}</span>
+            <strong>{common("lebanon")}</strong>
+          </li>
+        </ul>
         <ContactForm />
       </section>
-    </>
+    </div>
   );
 }

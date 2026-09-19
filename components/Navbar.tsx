@@ -8,6 +8,7 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { company } from "@/lib/company";
 import { useTranslations } from "next-intl";
 import { LanguageSelect } from "./LanguageSelect";
+import { useScrollProgress } from "@/lib/motion";
 
 const links = [
   ["/network", "network"],
@@ -23,6 +24,18 @@ export function Navbar({signedIn=false}:{signedIn?:boolean}) {
   const pathname = usePathname();
   const panel = useRef<HTMLElement>(null);
   const toggle = useRef<HTMLButtonElement>(null);
+  const progress = useRef<HTMLSpanElement>(null);
+  const [scrolled, setScrolled] = useState(false);
+  useScrollProgress(progress, "page");
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  // On the home page the hero carries the logo; the nav logo docks in once the hero is passed.
+  const dockLogo = pathname === "/" && !scrolled;
 
   useEffect(() => {
     if (!open) return;
@@ -66,7 +79,10 @@ export function Navbar({signedIn=false}:{signedIn?:boolean}) {
   }, [open]);
 
   return (
-    <header className="site-header">
+    <header
+      className={`site-header ${scrolled ? "is-scrolled" : ""} ${dockLogo ? "is-top" : ""} ${open ? "menu-open" : ""}`}
+    >
+      <span className="pv-progress" ref={progress} aria-hidden="true" />
       <div className="container header-inner">
         <Link
           className="brand"
@@ -75,10 +91,10 @@ export function Navbar({signedIn=false}:{signedIn?:boolean}) {
           onClick={() => setOpen(false)}
         >
           <Image
-            src={company.logo}
+            src={company.logoTransparent}
             alt="PanoVision. Where brands get seen."
-            width={1000}
-            height={180}
+            width={1500}
+            height={274}
             priority
           />
         </Link>
@@ -111,11 +127,11 @@ export function Navbar({signedIn=false}:{signedIn?:boolean}) {
           <Link className="account-nav-link" href={signedIn?"/dashboard":"/login"} onClick={() => setOpen(false)}>{t(signedIn?"dashboard":"login")}</Link>
           <LanguageSelect />
           <Link
-            className="button button-small"
+            className="pv-button pv-button-small"
             href="/start-campaign"
             onClick={() => setOpen(false)}
           >
-            {t("start")} <ArrowUpRight size={16} />
+            <span>{t("start")}</span> <ArrowUpRight size={16} />
           </Link>
         </nav>
       </div>

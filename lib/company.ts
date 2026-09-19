@@ -13,6 +13,8 @@ export const company = {
   },
   phone: "", // Add your real Lebanese or international phone number here.
   logo: "/brand/panovision-logo.webp",
+  // The same official logo with its baked-in navy background removed (see scripts/prepare-visuals.mjs).
+  logoTransparent: "/brand/panovision-logo-hero.webp",
   conceptImage: "/images/canopy-concept.webp",
   // Drafts are stored at upload; final requests require an approved current creative.
   submissionMode: "connected" as "demo" | "connected",
