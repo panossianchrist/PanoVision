@@ -1,0 +1,3 @@
+# Reviewed false positive: synthetic password for isolated customer-account tests.
+# Only this exact historical finding is excluded; no directory or rule is disabled.
+05b01eac715854cd952cf8524812ac09f39ff3cc:tests/customer-accounts.test.ts:generic-api-key:35

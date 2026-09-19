@@ -17,6 +17,16 @@ test-results/
 *.sqlite-shm
 *.pem
 *.key
+*.p12
+*.pfx
+.secrets/
+secrets/
+.npmrc
+.netrc
+.git-credentials
+credentials.json
+credentials.*.json
+service-account*.json
 .claude/settings.local.json
 *.log
 tests/.moderation-*/
