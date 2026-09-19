@@ -1,0 +1,26 @@
+node_modules/
+.next/
+dist/
+out/
+.env
+.env.local
+.env.*.local
+.env*
+!.env.example
+*.tsbuildinfo
+test-results/
+.pnpm-store/
+.tools/
+.private/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.pem
+*.key
+.claude/settings.local.json
+*.log
+tests/.moderation-*/
+npm.tgz
+# Machine-local npm CLI, not PanoVision application source.
+/package/
+test-desktop.png
