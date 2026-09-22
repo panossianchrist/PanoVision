@@ -102,7 +102,10 @@
     "prepare": "Prepare message",
     "prepared": "Your message is prepared, not sent.",
     "send": "Open email app",
-    "download": "Download message"
+    "download": "Download message",
+    "l1": "LET'S PUT",
+    "l2": "YOUR BRAND",
+    "l3": "IN VIEW."
   },
   "networkPage": {
     "title": "LEBANON. A CONNECTED VISION.",
@@ -439,7 +442,7 @@
     "connectedIndex": "06 / A connected process",
     "connectedTitle": "LESS BACK AND FORTH. MORE IN VIEW.",
     "connectedText": "Plan locations, preview creative and follow your campaign from one private customer space.",
-    "aboutIndex": "07 / About PanoVision",
+    "aboutIndex": "06 / About PanoVision",
     "aboutTitle": "A NEW VIEW OF OUTDOOR MEDIA.",
     "rooted": "Rooted in Lebanon. Built around visibility.",
     "aboutText": "PanoVision is a Lebanon-based digital outdoor advertising company developing a connected roadside media network.",
@@ -493,7 +496,17 @@
       "Saida": "Saida / Sidon",
       "Tyre": "Tyre",
       "Nabatieh": "Nabatieh"
-    }
+    },
+    "hint": "Ctrl + scroll to zoom",
+    "controls": "Map controls",
+    "screensSoon": "PANOVISION SCREEN LOCATIONS COMING AS THE NETWORK EXPANDS.",
+    "reachAreas": "{count, plural, one {area selected} other {areas selected}}",
+    "factType": "Campaign type",
+    "factTypeValue": "Chosen in the next step",
+    "factScreens": "Potential screens",
+    "factPrice": "Estimated price",
+    "factPriceValue": "Pending review",
+    "reach": "YOUR REACH"
   },
   "estimate": {
     "title": "Campaign estimate",
@@ -527,7 +540,42 @@
     "Custom": "Custom message",
     "occasion": "Occasion type",
     "time": "Preferred time (Beirut)",
-    "minutes": "Custom duration in minutes"
+    "minutes": "Custom duration in minutes",
+    "t1": "MAKE THE MOMENT",
+    "t2": "IMPOSSIBLE TO MISS.",
+    "question": "WHAT'S THE MOMENT?",
+    "duration": "HOW LONG?",
+    "previewTag": "SAMPLE PREVIEW",
+    "demo": "PanoVision demo content",
+    "Other": "Other",
+    "screenLabel": "PanoVision display previewing a sample message for the chosen occasion",
+    "faces": {
+      "Birthday": {
+        "tag": "BIRTHDAY",
+        "a": "YOUR MESSAGE",
+        "b": "IN LIGHTS."
+      },
+      "Proposal": {
+        "tag": "PROPOSAL",
+        "a": "A MOMENT",
+        "b": "WORTH SEEING."
+      },
+      "Launch": {
+        "tag": "LAUNCH",
+        "a": "NOW",
+        "b": "IN VIEW."
+      },
+      "Celebration": {
+        "tag": "CELEBRATION",
+        "a": "MAKE IT",
+        "b": "VISIBLE."
+      },
+      "Custom": {
+        "tag": "YOUR MOMENT",
+        "a": "YOUR WORDS",
+        "b": "ON SCREEN."
+      }
+    }
   },
   "preview": {
     "title": "PanoVision screen preview",
@@ -559,7 +607,9 @@
   "cta": {
     "label": "Your next campaign starts here",
     "title": "READY TO BE SEEN?",
-    "text": "Tell us where, when and how you want your campaign to appear."
+    "text": "Tell us where, when and how you want your campaign to appear.",
+    "t1": "READY TO",
+    "t2": "BE SEEN?"
   },
   "workflow": {
     "Explore": "Explore",
@@ -578,5 +628,63 @@
     "LiveText": "Approved campaigns run on confirmed screens and dates.",
     "Verify": "Verify",
     "VerifyText": "View evidence and reporting when real delivery data is available."
+  },
+  "hero": {
+    "tag1": "PANOVISION",
+    "tag2": "PANOVISION NETWORK",
+    "tag3": "08 SEC FORMAT",
+    "tag4": "LEBANON",
+    "f1a": "YOUR BRAND",
+    "f1b": "HERE.",
+    "f2a": "WHERE BRANDS",
+    "f2b": "GET SEEN.",
+    "f3a": "08 SECONDS.",
+    "f3b": "HIGH IMPACT.",
+    "f4a": "BUILD",
+    "f4b": "YOUR REACH.",
+    "index1": "Digital screens, elevated above the road",
+    "index2": "Campaigns planned and previewed online",
+    "index3": "Lebanon, city by city",
+    "screenLabel": "PanoVision demonstration display cycling through sample PanoVision messages",
+    "format": "08 SEC FORMAT",
+    "media": "DIGITAL OUTDOOR MEDIA",
+    "building": "NETWORK BUILDING",
+    "ready": "CREATIVE READY",
+    "demo": "PanoVision demo content"
+  },
+  "road": {
+    "l1": "THE ROAD",
+    "l2": "IS THE",
+    "l3": "AUDIENCE."
+  },
+  "concept": {
+    "l1": "BUILT TO",
+    "l2": "BE SEEN.",
+    "note1": "ELEVATED DIGITAL DISPLAY",
+    "note2": "ROADSIDE VISIBILITY",
+    "note3": "08 SEC FORMAT"
+  },
+  "network": {
+    "label": "THE NETWORK",
+    "l1": "BUILD",
+    "l2": "YOUR REACH.",
+    "support": "Select one city, combine several areas, and build the starting point of your campaign."
+  },
+  "flow": {
+    "demoLabel": "Demonstration of a fictional creative moving from upload to preview and review",
+    "idle": "AWAITING CREATIVE",
+    "tileTag": "FICTIONAL CREATIVE",
+    "tileA": "YOUR AD",
+    "tileB": "HERE.",
+    "drop": "DROP CREATIVE",
+    "demoNote": "Demonstration with a fictional PanoVision creative. Not a customer campaign.",
+    "status0": "CHOOSING AREAS",
+    "status1": "BUILDING THE BRIEF",
+    "status2": "CREATIVE UPLOADED",
+    "status3": "PREVIEW READY",
+    "status4": "UNDER REVIEW",
+    "status5": "QUOTE AFTER APPROVAL",
+    "status6": "READY TO GO LIVE",
+    "status7": "EVIDENCE WHEN DELIVERED"
   }
 }

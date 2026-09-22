@@ -1,7 +1,8 @@
 "use client";
-import { useMemo, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
-import { ArrowUpRight, X, Check, MapPin } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ArrowUpRight, X, Check, MonitorPlay } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { LebanonNetworkMap, MapAttribution } from "./LebanonNetworkMap";
 import { locations } from "@/data/locations";
@@ -14,6 +15,8 @@ import {
   toggleScreen,
   type LocationSelection,
 } from "@/lib/selection";
+import { formatCoordinate } from "@/lib/geo";
+import { useReducedMotion } from "@/lib/motion";
 import { pricing } from "@/config/pricing";
 
 let memorySelection = "";
@@ -35,7 +38,9 @@ export function NetworkSection({ full = false }: { full?: boolean }) {
     common = useTranslations("common"),
     estimate = useTranslations("estimate"),
     extra = useTranslations("extras"),
-    locale = useLocale();
+    locale = useLocale(),
+    router = useRouter(),
+    reduced = useReducedMotion();
   const snapshot = useSyncExternalStore(
     subscribeSelection,
     selectionSnapshot,
@@ -53,6 +58,9 @@ export function NetworkSection({ full = false }: { full?: boolean }) {
   }, [snapshot]);
   const [focused, setFocused] = useState("");
   const [screen, setScreen] = useState("");
+  const [launching, setLaunching] = useState(false);
+  const launchTimer = useRef(0);
+  useEffect(() => () => window.clearTimeout(launchTimer.current), []);
   const update = (next: LocationSelection) => {
     memorySelection = JSON.stringify(next);
     try {
@@ -82,9 +90,30 @@ export function NetworkSection({ full = false }: { full?: boolean }) {
     new Intl.NumberFormat(locale, { style: "currency", currency }).format(
       amount,
     );
+  const count = selection.cities.length;
+  const hasSelection = count > 0 || selection.screens.length > 0;
+  const url = campaignUrl(selection);
+  const plan = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (
+      !hasSelection ||
+      reduced ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.button !== 0
+    )
+      return;
+    event.preventDefault();
+    setLaunching(true);
+    launchTimer.current = window.setTimeout(() => router.push(url), 640);
+  };
+
   return (
-    <div className={`network-explorer ${full ? "full-explorer" : ""}`}>
-      <div className="network-geography">
+    <div
+      className={`pv-net ${full ? "is-full" : ""}`}
+      data-launching={launching}
+    >
+      <div className="pv-net-stage">
         <LebanonNetworkMap
           selection={selection}
           onCity={onCity}
@@ -92,29 +121,46 @@ export function NetworkSection({ full = false }: { full?: boolean }) {
         />
         <MapAttribution />
       </div>
-      <div className="network-sidebar">
-        <div className="explorer-heading">
-          <h3>{t("pick")}</h3>
+
+      <aside className="pv-reach" aria-label={t("reach")}>
+        <header className="pv-reach-head">
+          <span className="micro">{t("reach")}</span>
           <span className="micro" dir="ltr">
             LB / 961
           </span>
+        </header>
+
+        <div className="pv-reach-count">
+          <output className="pv-count-num" aria-live="polite" key={count}>
+            {String(count).padStart(2, "0")}
+          </output>
+          <span>{t("reachAreas", { count })}</span>
         </div>
-        <p className="small">{t("availability")}</p>
-        <div className="city-options" aria-label={t("pick")}>
-          {cities.map((city) => (
-            <button
-              type="button"
-              key={city.name}
-              aria-pressed={selection.cities.includes(city.name)}
-              onClick={() => onCity(city.name)}
-            >
-              <span className="city-checkbox">
-                {selection.cities.includes(city.name) && <Check size={12} />}
-              </span>
-              {t(`cityNames.${city.name}`)}
-            </button>
-          ))}
+
+        <p className="small pv-reach-note">{t("availability")}</p>
+
+        <div className="city-options" role="group" aria-label={t("pick")}>
+          {cities.map((city) => {
+            const on = selection.cities.includes(city.name);
+            return (
+              <button
+                type="button"
+                key={city.name}
+                aria-pressed={on}
+                onClick={() => onCity(city.name)}
+              >
+                <span className="city-checkbox" aria-hidden="true">
+                  {on && <Check size={11} strokeWidth={3} />}
+                </span>
+                {t(`cityNames.${city.name}`)}
+                <span className="pv-city-geo" dir="ltr" aria-hidden="true">
+                  {formatCoordinate(city.longitude, city.latitude)}
+                </span>
+              </button>
+            );
+          })}
         </div>
+
         <div className="selection-summary" aria-live="polite">
           <span className="micro muted">{t("selected")}</span>
           <div className="selection-chips">
@@ -128,7 +174,7 @@ export function NetworkSection({ full = false }: { full?: boolean }) {
                   })}
                   onClick={() => update(toggleCity(selection, city))}
                 >
-                  <X size={14} />
+                  <X size={13} />
                 </button>
               </span>
             ))}
@@ -142,51 +188,44 @@ export function NetworkSection({ full = false }: { full?: boolean }) {
                   })}
                   onClick={() => update(toggleScreen(selection, id))}
                 >
-                  <X size={14} />
+                  <X size={13} />
                 </button>
               </span>
             ))}
+            {!hasSelection && (
+              <span className="pv-chip-empty">{t("noSelection")}</span>
+            )}
           </div>
-          <strong>{t("count", { count: selection.cities.length })}</strong>
           {!!selection.screens.length && (
-            <span>{t("screenCount", { count: selection.screens.length })}</span>
+            <strong className="pv-screens-count">
+              {t("screenCount", { count: selection.screens.length })}
+            </strong>
           )}
         </div>
-        <div className="network-result">
-          <h3>
-            {activeScreen?.name ||
-              (focused ? t(`cityNames.${focused}`) : t("noSelection"))}
-          </h3>
-          {focused && (
-            <dl className="network-status">
-              <div>
-                <dt>{t("interest")}</dt>
-                <dd>
-                  {selection.cities.includes(focused) ||
-                  (screen && selection.screens.includes(screen))
-                    ? t("chosen")
-                    : common("none")}
-                </dd>
-              </div>
-              <div>
-                <dt>{t("status")}</dt>
-                <dd>{t("review")}</dd>
-              </div>
-              <div>
-                <dt>{t("creative")}</dt>
-                <dd>
-                  {activeScreen
-                    ? [
-                        activeScreen.supportsImage ? common("image") : "",
-                        activeScreen.supportsVideo ? common("video") : "",
-                      ]
-                        .filter(Boolean)
-                        .join(" / ") || common("pending")
-                    : t("formats")}
-                </dd>
-              </div>
-            </dl>
-          )}
+
+        <dl className="pv-facts">
+          <div>
+            <dt>{t("factType")}</dt>
+            <dd>{t("factTypeValue")}</dd>
+          </div>
+          <div>
+            <dt>{t("factScreens")}</dt>
+            <dd>{t("review")}</dd>
+          </div>
+          <div>
+            <dt>{t("factPrice")}</dt>
+            <dd>{t("factPriceValue")}</dd>
+          </div>
+        </dl>
+
+        <div className="pv-screenlayer">
+          <div className="pv-screenlayer-head">
+            <MonitorPlay size={15} />
+            <span className="micro">{t("screens")}</span>
+            <h3>
+              {activeScreen?.name || (focused ? t(`cityNames.${focused}`) : "")}
+            </h3>
+          </div>
           {activeScreen && (
             <dl className="network-status">
               <div>
@@ -209,6 +248,17 @@ export function NetworkSection({ full = false }: { full?: boolean }) {
                   {activeScreen.screenWidth && activeScreen.screenHeight
                     ? `${activeScreen.screenWidth} × ${activeScreen.screenHeight}`
                     : common("pending")}
+                </dd>
+              </div>
+              <div>
+                <dt>{t("creative")}</dt>
+                <dd>
+                  {[
+                    activeScreen.supportsImage ? common("image") : "",
+                    activeScreen.supportsVideo ? common("video") : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" / ") || common("pending")}
                 </dd>
               </div>
               <div>
@@ -244,34 +294,35 @@ export function NetworkSection({ full = false }: { full?: boolean }) {
                   aria-pressed={selection.screens.includes(location.id)}
                   onClick={() => onScreen(location.id)}
                 >
-                  <MapPin size={16} />
+                  <MonitorPlay size={15} />
                   {location.name}
                   <span>
                     {selection.screens.includes(location.id) ? (
-                      <Check size={16} />
+                      <Check size={15} />
                     ) : (
-                      "+"
+                      t("screen")
                     )}
                   </span>
                 </button>
               ))}
             </div>
           ) : (
-            <p className="small muted">
+            <p className="small pv-screenlayer-empty">
               {focused ? t("empty") : t("expanded")}
             </p>
           )}
         </div>
+
         <p className="small estimate-note">{estimate("pending")}</p>
         <div className="network-actions">
-          <Link className="button" href={campaignUrl(selection)}>
-            {t("plan")}
+          <Link className="pv-button" href={url} onClick={plan}>
+            <span>{t("plan")}</span>
             <ArrowUpRight size={17} />
           </Link>
           <button
             type="button"
-            className="text-link"
-            disabled={!selection.cities.length && !selection.screens.length}
+            className="pv-clear"
+            disabled={!hasSelection}
             onClick={() => {
               update(emptySelection);
               setFocused("");
@@ -281,7 +332,7 @@ export function NetworkSection({ full = false }: { full?: boolean }) {
             {common("clear")}
           </button>
         </div>
-      </div>
+      </aside>
     </div>
   );
 }

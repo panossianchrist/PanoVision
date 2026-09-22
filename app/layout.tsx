@@ -11,6 +11,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import "./globals.css";
 import "./platform.css";
+import "./redesign.css";
+import "./sections.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { optionalAccountSession } from "@/lib/server/account-page";

@@ -12,6 +12,15 @@ Generated with the built-in image generation tool during this task. Original out
 
 Creative brief used: a photorealistic unbranded gas-station canopy on the Lebanese coast, with an elevated digital advertising screen. Blue screen creative features a silver car and the words YOUR NEXT MOVE. No gas-station operator, car-maker logo or customer identity. Clear daylight and an inspectable screen structure, in a wide website-friendly composition. The final image is visibly labeled Concept visual on the website. This is a descriptive provenance record, not a claim to preserve the generator's exact verbatim prompt.
 
+## Website Derivatives (design pass 2)
+
+Originals are never modified. `scripts/prepare-visuals.mjs` regenerates both derivatives from them:
+
+- `public/images/panovision-concept-enhanced.webp`: a cinematic colour grade of `canopy-concept.webp` (deeper sky, cool environment, brighter display, screen light spilling onto the canopy, vignette). It changes lighting and grade only; it does not add or alter any structure, brand or logo, and it is still shown with the visible **Concept visual** label. The four corners of the display used for the glow and annotations are measured in that script.
+- `public/brand/panovision-logo-hero.webp`: the official `PanoVision_Logo.png` with its baked-in navy background converted to true transparency (artwork unchanged), so light effects can sit behind it. Used by the hero, navigation and footer.
+
+`scripts/prepare-sea.mjs` derives `data/lebanon-sea.ts` (the Mediterranean side of the map, for the coastal glow) from the same geoBoundaries ADM0 outline and the same projection as `prepare-map.mjs`. `data/lebanon-map.json` itself is unchanged.
+
 ## Geographic Map
 
 The map is derived from actual administrative geometry, not an invented outline. `scripts/prepare-map.mjs` downloads and projects the data with `d3-geo`, creating `data/lebanon-map.json`. Raw GeoJSON and source metadata are retained in `public/maps/`.

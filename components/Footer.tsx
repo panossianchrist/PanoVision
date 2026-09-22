@@ -8,16 +8,27 @@ export function Footer() {
   const t = useTranslations("common"), f = useTranslations("footer"), locale = useLocale();
   const whatsapp = whatsappLink(locale);
   return (
-    <footer className="site-footer">
+    <footer className="site-footer pv-footer">
+      <span className="pv-footer-word" aria-hidden="true">
+        PANOVISION
+      </span>
+      <span className="pv-footer-signal" aria-hidden="true" />
       <div className="container">
+        <div className="pv-footer-lead">
+          <p className="pv-footer-claim">{t("tagline")}</p>
+          <Link className="pv-button" href="/start-campaign">
+            <span>{t("start")}</span>
+            <ArrowUpRight size={18} />
+          </Link>
+        </div>
         <div className="footer-top">
           <div className="footer-brand">
             <Link href="/">
               <Image
-                src={company.logo}
+                src={company.logoTransparent}
                 alt={`PanoVision. ${t("tagline")}`}
-                width={1000}
-                height={180}
+                width={1500}
+                height={274}
               />
             </Link>
             <p>{f("description")}</p>
@@ -43,14 +54,10 @@ export function Footer() {
                 {t("contact")} <ArrowUpRight size={15} />
               </Link>
             )}
-            {company.instagram ? (
+            {company.instagram && (
               <a href={company.instagram} target="_blank" rel="noreferrer">
                 <span dir="ltr">{company.instagramHandle}</span> <ArrowUpRight size={15} />
               </a>
-            ) : (
-              <span className="muted">
-                Instagram <span className="micro">Coming soon</span>
-              </span>
             )}
             {whatsapp && <a href={whatsapp} target="_blank" rel="noreferrer">WhatsApp <ArrowUpRight size={15} /></a>}
           </div>
